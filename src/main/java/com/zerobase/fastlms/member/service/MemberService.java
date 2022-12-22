@@ -58,4 +58,14 @@ public interface MemberService extends UserDetailsService {
      * 회원을 탈퇴시켜 주는 로직
      */
     ServiceResult withdraw(String userId, String password);
+
+    /*
+    입력 받은 uuid에 대해서 password로 초기화 함
+     */
+    boolean resetPassword(String uuid, String password);
+
+    /*
+    입력 받은 uuid가 유효한지 확인
+     */
+    boolean checkResetPassword(String uuid);
 }
