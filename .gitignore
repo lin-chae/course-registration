@@ -41,4 +41,4 @@ build/
 /target/
 /mvnw
 /mvnw.cmd
-/files/
+/src/main/resources/static/res/se2/files/
