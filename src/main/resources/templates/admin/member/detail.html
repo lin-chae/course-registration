@@ -98,10 +98,25 @@
 
         <div>
             <a href="list.do"> 목록 </a>
-
         </div>
-
-
+        <table>
+            <tbody>
+            <tr>
+                <th>아이디</th>
+                <th>로그인 일자</th>
+                <th>접속 IP</th>
+                <th>접속 UserAgent</th>
+            <tr>
+            </tbody>
+            <th:block th:each="memberLog: ${member.memberLogList}">
+                <tr>
+                    <td><p th:text="${memberLog.getId()}"></p></td>
+                    <td><p th:text="${memberLog.getLogInDt()}"></p></td>
+                    <td><p th:text="${memberLog.getIp()}"></p></td>
+                    <td><p th:text="${memberLog.getUserAgent()}"></p></td>
+                </tr>
+            </th:block>
+        </table>
     </div>
 
 

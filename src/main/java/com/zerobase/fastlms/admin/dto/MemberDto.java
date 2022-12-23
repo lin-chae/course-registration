@@ -1,6 +1,7 @@
 package com.zerobase.fastlms.admin.dto;
 
 import com.zerobase.fastlms.member.entity.Member;
+import com.zerobase.fastlms.member.entity.MemberLog;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,10 +33,12 @@ public class MemberDto {
     
     boolean adminYn;
     String userStatus;
+    LocalDateTime lastLogInDt;
     
     private String zipcode;
     private String addr;
     private String addrDetail;
+    private List<MemberLog> memberLogList;
     
     //추가컬럼
     long totalCount;
@@ -57,11 +61,11 @@ public class MemberDto {
                 .resetPasswordLimitDt(member.getResetPasswordLimitDt())
                 .adminYn(member.isAdminYn())
                 .userStatus(member.getUserStatus())
-                
+                .lastLogInDt(member.getLastLogInDt())
                 .zipcode(member.getZipcode())
                 .addr(member.getAddr())
                 .addrDetail(member.getAddrDetail())
-                
+                .memberLogList(member.getMemberLogList())
                 .build();
     }
     

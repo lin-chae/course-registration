@@ -7,14 +7,17 @@ import com.zerobase.fastlms.components.MailComponents;
 import com.zerobase.fastlms.course.model.ServiceResult;
 import com.zerobase.fastlms.member.entity.Member;
 import com.zerobase.fastlms.member.entity.MemberCode;
+import com.zerobase.fastlms.member.entity.MemberLog;
 import com.zerobase.fastlms.member.exception.MemberNotEmailAuthException;
 import com.zerobase.fastlms.member.exception.MemberStopUserException;
 import com.zerobase.fastlms.member.model.MemberInput;
 import com.zerobase.fastlms.member.model.ResetPasswordInput;
+import com.zerobase.fastlms.member.repository.MemberLogRepository;
 import com.zerobase.fastlms.member.repository.MemberRepository;
 import com.zerobase.fastlms.member.service.MemberService;
 import com.zerobase.fastlms.util.PasswordUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -23,7 +26,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,6 +42,7 @@ import java.util.UUID;
 public class MemberServiceImpl implements MemberService {
     
     private final MemberRepository memberRepository;
+    private final MemberLogRepository memberLogRepository;
     private final MailComponents mailComponents;
     
     private final MemberMapper memberMapper;
@@ -324,6 +331,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         Member member = optionalMember.get();
+        MemberLog memberLog = new MemberLog();
         
         if (Member.MEMBER_STATUS_REQ.equals(member.getUserStatus())) {
             throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인을 해주세요.");
@@ -344,21 +352,18 @@ public class MemberServiceImpl implements MemberService {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
 
+        HttpServletRequest req = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        String ip = req.getHeader("X-FORWARDED-FOR");
+        if (ip == null)
+            ip = req.getRemoteAddr();
+        memberLog.setIp(ip);
+        memberLog.setUserAgent(req.getHeader(HttpHeaders.USER_AGENT));
+        LocalDateTime now = LocalDateTime.now();
+        memberLog.setLogInDt(now);
+        memberLog.setMember(member);
+        member.setLastLogInDt(now);
+        memberLogRepository.save(memberLog);
+        memberRepository.save(member);
         return new User(member.getUserId(), member.getPassword(), grantedAuthorities);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
