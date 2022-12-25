@@ -5,12 +5,35 @@
     <title>메인 페이지</title>
 </head>
 <body>
-    <h1>메인 페이지 </h1>
-    <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
+<h1>메인 페이지 </h1>
+<div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
 
-    <div>
-        <img src="../files/2022/12/23/b2cdcea2ca9643b0b584a2c1164133bb.PNG"/>
-    </div>
+<link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="jquery.bxslider/jquery.bxslider.js"></script>
 
+<div class="home__slider">
+        <div class="bxslider">
+        <div>
+            <img src="../files/2022/12/23/b2cdcea2ca9643b0b584a2c1164133bb.PNG"/>
+        </div>
+
+        <div>
+            <a href="#"><img src="../files/2022/12/23/3ee2f6edb6724db38c3fc85c05c6e32c.PNG"/></a>
+        </div>
+
+        <div>
+            <a href="#"><img src="../files/2022/12/24/6dad47a8a0164a34ac024a42d8e1fd52.PNG"/></a>
+        </div>
+    <!--<img src="../files/2022/12/23/b2cdcea2ca9643b0b584a2c1164133bb.PNG"/>-->
+</div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+        $(document).ready(function(){
+            $('.bxslider').bxSlider();
+        });
+        //]]>
+    </script>
 </body>
 </html>
