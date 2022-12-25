@@ -52,6 +52,7 @@ public class BannerServiceImpl implements BannerService {
         Banner banner = optionalBanner.get();
         banner.setLink(parameter.getLink());
         banner.setSortValue(parameter.getSortValue());
+        banner.setStates(parameter.getStates());
         banner.setUsingYn(parameter.isUsingYn());
         banner.setFilename(parameter.getFilename());
         banner.setUrlFilename(parameter.getUrlFilename());

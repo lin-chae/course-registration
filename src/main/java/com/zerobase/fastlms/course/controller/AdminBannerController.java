@@ -134,10 +134,9 @@ public class AdminBannerController extends BaseController {
                 log.info("############################ - 1");
                 log.info(e.getMessage());
             }
+            parameter.setFilename(saveFilename);
+            parameter.setUrlFilename(urlFilename);
         }
-
-        parameter.setFilename(saveFilename);
-        parameter.setUrlFilename(urlFilename);
 
         boolean editMode = request.getRequestURI().contains("/edit.do");
 

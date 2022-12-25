@@ -101,8 +101,8 @@
                     공개 여부
                 </th>
             <td>
-                <input th:checked="${bannerDetail.usingYn}" type="checkbox" th:id="'usingYn_' + ${bannerDetail.id}" th:name="'usingYn_' + ${bannerDetail.id}" value="true"/>
-                <label th:for="'usingYn_' + ${bannerDetail.id}">공개</label>
+                <input th:checked="${bannerDetail.isUsingYn()}" type="checkbox" th:id= "usingYn" th:name= "usingYn" value="true"/>
+                <label th:for= "usingYn">공개</label>
             </td>
             </tr>
             </tbody>

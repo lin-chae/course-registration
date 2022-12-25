@@ -2,8 +2,10 @@ package com.zerobase.fastlms.main.controller;
 
 
 import com.zerobase.fastlms.components.MailComponents;
+import com.zerobase.fastlms.course.repository.BannerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,10 +19,10 @@ import java.io.PrintWriter;
 public class MainController {
 
     private final MailComponents mailComponents;
-    
+    private final BannerRepository bannerRepository;
     @RequestMapping("/")
-    public String index() {
-        
+    public String index(Model model) {
+        model.addAttribute("bannerList",bannerRepository.findAllByUsingYnIsTrue());
         /*
         String email = "oumuamua@naver.com";
         String subject = " 안녕하세요. 제로베이스 입니다. ";

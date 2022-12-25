@@ -37,6 +37,7 @@ public class BannerDto {
         return BannerDto.builder()
                 .id(banner.getId())
                 .subject(banner.getSubject())
+                .states(banner.getStates())
                 .link(banner.getLink())
                 .imagePath(banner.getImagePath())
                 .sortValue(banner.getSortValue())

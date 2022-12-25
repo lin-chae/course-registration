@@ -8,32 +8,24 @@
 <h1>메인 페이지 </h1>
 <div th:replace="/fragments/layout.html :: fragment-body-menu"></div>
 
-<link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script src="jquery.bxslider/jquery.bxslider.js"></script>
+<link href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <div class="home__slider">
-        <div class="bxslider">
-        <div>
-            <img src="../files/2022/12/23/b2cdcea2ca9643b0b584a2c1164133bb.PNG"/>
+    <div class="bxslider">
+        <div th:each="x: ${bannerList}">
+            <a th:href="${x.getLink()}"><img th:src="${x.getUrlFilename()}" style="display: block; margin: 0 auto; height: 70vh" /></a>
         </div>
-
-        <div>
-            <a href="#"><img src="../files/2022/12/23/3ee2f6edb6724db38c3fc85c05c6e32c.PNG"/></a>
-        </div>
-
-        <div>
-            <a href="#"><img src="../files/2022/12/24/6dad47a8a0164a34ac024a42d8e1fd52.PNG"/></a>
-        </div>
-    <!--<img src="../files/2022/12/23/b2cdcea2ca9643b0b584a2c1164133bb.PNG"/>-->
+    </div>
 </div>
 
-    <script type="text/javascript">
-        //<![CDATA[
-        $(document).ready(function(){
-            $('.bxslider').bxSlider();
-        });
-        //]]>
-    </script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(document).ready(function () {
+        $('.bxslider').bxSlider();
+    });
+    //]]>
+</script>
 </body>
 </html>
