@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -129,7 +130,7 @@ public class AdminBannerController extends BaseController {
 
             try {
                 File newFile = new File(saveFilename);
-                FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(newFile));
+                FileCopyUtils.copy(file.getInputStream(), Files.newOutputStream(newFile.toPath()));
             } catch (IOException e) {
                 log.info("############################ - 1");
                 log.info(e.getMessage());
